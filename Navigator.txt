@@ -1,0 +1,66 @@
+The Base URL is http://<hostname>:9711
+
+Configure .env file.
+
+This project is a Node.js project with the APIs already defined.
+There are 4 APIs in this project:
+
+Method: GET
+Endpoint: /paths
+Purpose: Return all paths with its id from database
+Return Example: [
+	{
+		"id" : 1,
+		"path": "r?d?drdd"
+	},
+	{
+		"id": 2,
+		"path": "???rrurdr?"
+	},
+	...
+]
+
+
+Method: POST
+Endpoint: /paths
+Body:
+path (string containing only 'u', 'd', 'l', 'r', '?')
+Purpose: Insert a new path to database
+Return: 204 status code
+
+
+Method: GET
+Endpoint: /paths/<id>/navigate
+This is your assignment. Write your code in /services/path.js, module.exports.navigate function.
+
+The above endpoint will first get the path via the id. The path represents the movements made in a 5x5 grid of cells starting from the top left position. The letters in the path string will be entirely composed of: r, l, u, d, ?. Each of the letters stand for the direction to take within the grid: r = right, l = left, u = up, d = down. Your goal is to determine what letters the question marks should be in order for a path to navigate from the top left of the grid all the way to the bottom right without touching previously travelled on cells in the grid.
+
+For example: if you call GET:/paths/1/navigate endpoint, the path is "r?d?drdd", then your program should output the final correct string that will allow a path to be formed from the top left of a 5x5 grid to the bottom right. For the result for that request, your program should therefore return the string "rrdrdrdd".
+
+For paths that cannot reach the bottom right, you can return null, false, undefined or empty string.
+
+Example of paths in the database and the expected results...
+
+GET:/paths/1/navigate
+Path: r?d?drdd
+Result: rrdrdrdd
+
+GET:/paths/2/navigate
+Path: ???rrurdr?
+Result: dddrrurdrd
+
+GET:/paths/3/navigate
+Path: drdr??rrddd?
+Result: drdruurrdddd
+
+====================================================================================================
+
+Feel free to use the defined APIs to help you with your assignment.
+
+POST:/paths to add new paths
+GET:/paths to see the list of paths.
+DELETE:/paths to clear the paths that you added
+
+GET:/paths/<id>/navigate should return the navigated path.
+
+Good submission should have self-documenting code.

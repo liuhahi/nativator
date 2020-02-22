@@ -1,0 +1,18 @@
+{
+  "name": "Navigator",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Larry Png",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "knex": "^0.20.8",
+    "mysql2": "^2.1.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
