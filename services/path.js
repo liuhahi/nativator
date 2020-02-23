@@ -48,7 +48,34 @@ module.exports.navigate = async (req, res, next) => {
 		// this is the path to navigate
 		let path = result.path;
 		// CODE STARTS HERE
-		
+		let total_r = path.match(/r/g).length;
+		if(path.match(/l/g) != null) {
+			total_r -= path.match(/l/g).length;
+		}
+		let total_d = path.match(/d/g).length;
+		if(path.match(/u/g) != null) {
+			total_d -= path.match(/d/g).length;
+		}
+		for (let i = 0; i < path.length; i++) {
+			if (path.charAt(i) == "l") {
+				total_r -= 1;
+			}
+			else if (path.charAt(i) == "u") {
+				total_d -= 1;
+			}
+			if (path.charAt(i) == "?") {
+				if (total_r < 4) {
+					path = path.substring(0, i) + 'r' + path.substring(i + 1);
+					total_r += 1;
+				} else if (total_d < 4) {
+					path = path.substring(0, i) + 'd' + path.substring(i + 1);
+					total_d += 1;
+				} else {
+					path = path.substring(0, i) + 'u' + path.substring(i + 1);
+					total_d -= 1;
+				}
+			}
+		}
 		// CODE ENDS HERE
 		res.status(200).json(path);
 	} catch (error) {
